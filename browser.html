@@ -79,15 +79,16 @@
 }
 
 .grid {
+    padding-left: 6px;
     display: flex;
     flex-wrap: wrap;
     width: 1100px  !important;
     border-left: 1px solid black;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     /* columns: 150px; */
-    /* grid-template-columns: repeat(auto-fill, minmax(150px, 290px)); */
-    gap: 16px;
+    /* grid-template-columns: repeat(3, minmax(150px, 1fr)); */
+    gap: 6px;
 }
 .details{
     display: none;
@@ -378,7 +379,7 @@ const books = [
         author: "Harper Lee",
         genres: ["Southern Gothic", "Coming-of-age"],
         priceUsd: 10.99,
-        rating: generateRandomRating(),
+        rating: 4.5,
         image: "https://m.media-amazon.com/images/I/81gepf1eMqL.jpg"
     },
     {
@@ -386,7 +387,7 @@ const books = [
         author: "George Orwell",
         genres: ["Dystopian", "Political fiction"],
         priceUsd: 9.99,
-        rating: generateRandomRating(),
+        rating: 4.5,
         image: "https://rukminim2.flixcart.com/image/704/844/xif0q/book/v/v/f/1984-original-imahc9p42zyurth5.jpeg?q=90&crop=false"
     },
     {
@@ -394,7 +395,7 @@ const books = [
         author: "F. Scott Fitzgerald",
         genres: ["Classic", "Tragedy"],
         priceUsd: 10.99,
-        rating: generateRandomRating(),
+        rating: 4.4,
         image: "https://m.media-amazon.com/images/I/71V1cA2fiZL._UF1000,1000_QL80_.jpg"
     },
     {
@@ -402,7 +403,7 @@ const books = [
         author: "Jane Austen",
         genres: ["Romance", "Classic"],
         priceUsd: 8.99,
-        rating: generateRandomRating(),
+        rating: 4.5,
         image: "https://m.media-amazon.com/images/I/81Scutrtj4L._UF1000,1000_QL80_.jpg"
     },
     {
@@ -410,7 +411,7 @@ const books = [
         author: "J.D. Salinger",
         genres: ["Coming-of-age", "Classic"],
         priceUsd: 9.99,
-        rating: generateRandomRating(),
+        rating: 4.2,
         image: "https://m.media-amazon.com/images/I/7108sdEUEGL.jpg"
     },
     {
@@ -418,7 +419,7 @@ const books = [
         author: "Herman Melville",
         genres: ["Adventure", "Classic"],
         priceUsd: 11.99,
-        rating: generateRandomRating(),
+        rating: 4.3,
         image: "https://m.media-amazon.com/images/I/71K4OH9CqOL._UF1000,1000_QL80_.jpg"
     },
     {
@@ -426,7 +427,7 @@ const books = [
         author: "Leo Tolstoy",
         genres: ["Historical", "Classic"],
         priceUsd: 14.99,
-        rating: generateRandomRating(),
+        rating: 4.3,
         image: "https://cdn.kobo.com/book-images/3ac03eac-d437-47e3-9b15-52542edabd56/1200/1200/False/war-and-peace-34.jpg"
     },
     {
@@ -434,7 +435,7 @@ const books = [
         author: "J.R.R. Tolkien",
         genres: ["Fantasy", "Epic"],
         priceUsd: 24.99,
-        rating: generateRandomRating(),
+        rating: 4.5,
         image: "https://m.media-amazon.com/images/I/7125+5E40JL._UF1000,1000_QL80_.jpg"
     },
     {
@@ -442,7 +443,7 @@ const books = [
         author: "J.K. Rowling",
         genres: ["Fantasy", "Young Adult"],
         priceUsd: 10.99,
-        rating: generateRandomRating(),
+        rating: 4.7,
         image: "https://m.media-amazon.com/images/I/81q77Q39nEL.jpg"
     },
     {
@@ -450,7 +451,7 @@ const books = [
         author: "Paulo Coelho",
         genres: ["Adventure", "Philosophical"],
         priceUsd: 12.99,
-        rating: generateRandomRating(),
+        rating: 4.6,
         image: "https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg"
     },
     {
@@ -458,80 +459,80 @@ const books = [
         author: "Khaled Hosseini",
         genres: ["Historical", "Drama"],
         priceUsd: 11.99,
-        rating: generateRandomRating(),
-        image: "https://m.media-amazon.com/images/I/617lxveUjYL._UF894,1000_QL80_.jpg"
+        rating: 4.6,
+        image: "https://m.media-amazon.com/images/I/81IzbD2IiIL.jpg"
     },
     {
         title: "The Hunger Games",
         author: "Suzanne Collins",
         genres: ["Dystopian", "Young Adult"],
         priceUsd: 10.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-The%20Hunger%20Games/400/600"
+        rating: 4.6,
+        image: "https://m.media-amazon.com/images/I/61I24wOsn8L._UF894,1000_QL80_.jpg"
     },
     {
         title: "The Book Thief",
         author: "Markus Zusak",
         genres: ["Historical", "Young Adult"],
         priceUsd: 12.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-The%20Book%20Thief/400/600"
+        rating: 4.6,
+        image: "https://m.media-amazon.com/images/I/914cHl9v7oL._UF1000,1000_QL80_.jpg"
     },
     {
         title: "Brave New World",
         author: "Aldous Huxley",
         genres: ["Dystopian", "Science Fiction"],
         priceUsd: 10.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Brave%20New%20World/400/600"
+        rating: 4.4,
+        image: "https://m.media-amazon.com/images/I/91D4YvdC0dL.jpg"
     },
     {
         title: "Crime and Punishment",
         author: "Fyodor Dostoevsky",
         genres: ["Psychological fiction", "Classic"],
         priceUsd: 12.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Crime%20and%20Punishment/400/600"
+        rating: 4.5,
+        image: "https://cdn.kobo.com/book-images/b1c96137-0ddf-4ee4-8f46-73bdfa9b8621/1200/1200/False/crime-and-punishment-by-fyodor-dostoevsky-1.jpg"
     },
     {
         title: "Don Quixote",
         author: "Miguel de Cervantes",
         genres: ["Satire", "Adventure"],
         priceUsd: 13.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Don%20Quixote/400/600"
+        rating: 4.7,
+        image: "https://m.media-amazon.com/images/I/61NlxaWjCYL.jpg"
     },
     {
         title: "Jane Eyre",
         author: "Charlotte Brontë",
         genres: ["Gothic", "Romance"],
         priceUsd: 9.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Jane%20Eyre/400/600"
+        rating:4.5,
+        image: "https://m.media-amazon.com/images/I/91zU70Aw9IS._UF1000,1000_QL80_.jpg"
     },
     {
         title: "Wuthering Heights",
         author: "Emily Brontë",
         genres: ["Gothic", "Romance"],
         priceUsd: 9.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Wuthering%20Heights/400/600"
+        rating: 4.4,
+        image: "https://m.media-amazon.com/images/I/81Tm5QXrdhL._UF1000,1000_QL80_.jpg"
     },
     {
         title: "The Da Vinci Code",
         author: "Dan Brown",
         genres: ["Thriller", "Mystery"],
         priceUsd: 9.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-The%20Da%20Vinci%20Code/400/600"
+        rating: 4.4,
+        image: "https://m.media-amazon.com/images/I/815WORuYMML._UF1000,1000_QL80_.jpg"
     },
     {
         title: "Life of Pi",
         author: "Yann Martel",
         genres: ["Adventure", "Philosophical"],
         priceUsd: 11.99,
-        rating: generateRandomRating(),
-        image: "https://picsum.photos/seed/book-Life%20of%20Pi/400/600"
+        rating: 4.5,
+        image: "https://m.media-amazon.com/images/I/816NlEQFMOL.jpg"
     }
 ];
 
