@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books • Book-Nest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+/* Browse page layout */
+.browse {
+    display: grid;
+    /* display: flex; */
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.filters {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    height: fit-content;
+    margin-top: 50px;
+}
+
+.filters-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.filter-group {
+    margin-bottom: 12px;
+    display: grid;
+    gap: 6px;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.results {
+    display: grid;
+    gap: 16px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.toolbar-search {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1100px  !important;
+    border-left: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    /* columns: 150px; */
+    /* grid-template-columns: repeat(auto-fill, minmax(150px, 290px)); */
+    gap: 16px;
+}
+.details{
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px 12px;
+    margin-left: 8px;
+    border-left: 1px solid rgba(0,0,0,0.08);
+    gap: 6px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+.details p{ margin: 2px 0; }
+.details .card-title{ margin: 0 0 6px 0; font-size: 18px; }
+.details-actions{ display: flex; gap: 8px; margin-top: 6px; }
+
+/* Button styles aligned with home.css */
+.btn-primary{
+    display: inline-block;
+    background-color: #111;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+.btn-primary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+    background-color: #000;
+}
+.btn-primary:active{
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18) inset;
+}
+
+.btn-secondary{
+    display: inline-block;
+    margin-left: 8px;
+    background-color: transparent;
+    color: #111;
+    border: 1px solid rgba(0,0,0,0.2);
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+.btn-secondary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    background-color: rgba(255,255,255,0.9);
+    border-color: rgba(0,0,0,0.3);
+}
+.btn-secondary:active{
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12) inset;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    line-height: 1;
+    padding: 10px;
+    display: grid;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    
+    /* gap: 8px; */
+    /* line-height: 1.4; */
+}
+
+.logo a {
+    text-decoration: none;
+    color: black;
+}
+
+.logo a:visited {
+    color: black;
+    /* prevent purple visited color */
+}
+.grid{
+    width: 900px;
+}
+.card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.86);
+    margin: 10px;
+  
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .browse {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        position: sticky;
+        top: 8px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card img {
+        height: 160px;
+    }
+}
+
+/* ===== GLOBAL STYLES ===== */
+body {
+    background-color: whitesmoke;
+    margin: 0px;
+    padding: 0%;
+}
+
+ul {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.material-symbols-outlined {
+    font-size: 25px;
+    font-weight: 900;
+    margin-top: 5px;
+    background-color: rgba(245, 245, 245, 0.712);
+    box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 6px;
+}
+
+.material-symbols-outlined:active {
+    box-shadow: inset 3px 1px 3px rgba(0, 0, 0, 0.5);
+    background-color: rgba(206, 206, 206, 0.979);
+}
+
+/* ===== HEADER SECTION ===== */
+nav {
+    display: flex;
+    height: 55px;
+    align-items: center;
+    box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 30px;
+    list-style: none;
+    font-weight: 900;
+    font-family: 'Permanent Marker', cursive;
+    float: left !important;
+    margin-left: 20px !important;
+    margin-right: 20px;
+}
+
+.navbar {
+    width: 85vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.title {
+    font-size: 30px;
+    font-style: italic;
+    font-family: 'Ms Madi', cursive;
+    font-weight: 900;
+    margin-bottom: -10px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1 class="logo"> <a href="index.html">BN</a></h1>
+            <div class="navbar">
+                <ul>
+                    <li class="title">Book-Nest</li>
+                </ul>
+            </div>
+            <div class="actions">
+                <span class="material-symbols-outlined" aria-label="Search">search</span>
+                <span class="material-symbols-outlined" aria-label="Cart">shopping_cart</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="browse">
+        <aside class="filters" aria-label="Filters">
+            <h2 class="filters-title">Filters</h2>
+            <div class="filter-group">
+                <label for="filter-search">Search</label>
+                <input id="filter-search" type="text" placeholder="Search books..." />
+            </div>
+            <div class="filter-group">
+                <label for="filter-genre">Genre</label>
+                <select id="filter-genre" class="filter-genres" onchange="genersfun()">
+                    <option value="">All genres</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Novel">Novel</option>
+                    <option value="Southern Gothic">Southern Gothic</option>
+                    <option value="Coming-of-age">Coming-of-age</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Political fiction">Political fiction</option>
+                    <option value="Tragedy">Tragedy</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Satire">Satire</option>
+                    <option value="Historical">Historical</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-sort">Sort by</label>
+                <select id="filter-sort">
+                    <option value="popular">Most popular</option>
+                    <option value="new">Newest</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="checkbox">
+                    <input type="checkbox" id="filter-available" />
+                    <span>In stock only</span>
+                </label>
+            </div>
+        </aside>
+
+        <section class="results" aria-label="Results">
+            <div class="toolbar">
+                <input type="text" class="toolbar-search" placeholder="Search all books..." aria-label="Search all books"     onkeyup="searchfun()" 
+                />
+                <div class="toolbar-actions">
+                    <button class="btn-primary">Browse Books</button>
+                    <button class="btn-secondary">Explore Genres</button>
+                </div>
+            </div>
+
+            <div id="grid" class="grid">
+               
+            </div>
+        </section>
+    </main>
+
+    <script>
+const generateRandomRating = (min = 3.5, max = 5.0, step = 0.1) => {
+    const steps = Math.floor((max - min) / step) + 1;
+    const value = min + Math.floor(Math.random() * steps) * step;
+    return Math.round(value * 10) / 10;
+};
+
+const books = [
+    {
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        genres: ["Southern Gothic", "Coming-of-age"],
+        priceUsd: 10.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/81gepf1eMqL.jpg"
+    },
+    {
+        title: "1984",
+        author: "George Orwell",
+        genres: ["Dystopian", "Political fiction"],
+        priceUsd: 9.99,
+        rating: generateRandomRating(),
+        image: "https://rukminim2.flixcart.com/image/704/844/xif0q/book/v/v/f/1984-original-imahc9p42zyurth5.jpeg?q=90&crop=false"
+    },
+    {
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        genres: ["Classic", "Tragedy"],
+        priceUsd: 10.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/71V1cA2fiZL._UF1000,1000_QL80_.jpg"
+    },
+    {
+        title: "Pride and Prejudice",
+        author: "Jane Austen",
+        genres: ["Romance", "Classic"],
+        priceUsd: 8.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/81Scutrtj4L._UF1000,1000_QL80_.jpg"
+    },
+    {
+        title: "The Catcher in the Rye",
+        author: "J.D. Salinger",
+        genres: ["Coming-of-age", "Classic"],
+        priceUsd: 9.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/7108sdEUEGL.jpg"
+    },
+    {
+        title: "Moby-Dick",
+        author: "Herman Melville",
+        genres: ["Adventure", "Classic"],
+        priceUsd: 11.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/71K4OH9CqOL._UF1000,1000_QL80_.jpg"
+    },
+    {
+        title: "War and Peace",
+        author: "Leo Tolstoy",
+        genres: ["Historical", "Classic"],
+        priceUsd: 14.99,
+        rating: generateRandomRating(),
+        image: "https://cdn.kobo.com/book-images/3ac03eac-d437-47e3-9b15-52542edabd56/1200/1200/False/war-and-peace-34.jpg"
+    },
+    {
+        title: "The Lord of the Rings",
+        author: "J.R.R. Tolkien",
+        genres: ["Fantasy", "Epic"],
+        priceUsd: 24.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/7125+5E40JL._UF1000,1000_QL80_.jpg"
+    },
+    {
+        title: "Harry Potter and the Sorcerer's Stone",
+        author: "J.K. Rowling",
+        genres: ["Fantasy", "Young Adult"],
+        priceUsd: 10.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/81q77Q39nEL.jpg"
+    },
+    {
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        genres: ["Adventure", "Philosophical"],
+        priceUsd: 12.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg"
+    },
+    {
+        title: "The Kite Runner",
+        author: "Khaled Hosseini",
+        genres: ["Historical", "Drama"],
+        priceUsd: 11.99,
+        rating: generateRandomRating(),
+        image: "https://m.media-amazon.com/images/I/617lxveUjYL._UF894,1000_QL80_.jpg"
+    },
+    {
+        title: "The Hunger Games",
+        author: "Suzanne Collins",
+        genres: ["Dystopian", "Young Adult"],
+        priceUsd: 10.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-The%20Hunger%20Games/400/600"
+    },
+    {
+        title: "The Book Thief",
+        author: "Markus Zusak",
+        genres: ["Historical", "Young Adult"],
+        priceUsd: 12.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-The%20Book%20Thief/400/600"
+    },
+    {
+        title: "Brave New World",
+        author: "Aldous Huxley",
+        genres: ["Dystopian", "Science Fiction"],
+        priceUsd: 10.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Brave%20New%20World/400/600"
+    },
+    {
+        title: "Crime and Punishment",
+        author: "Fyodor Dostoevsky",
+        genres: ["Psychological fiction", "Classic"],
+        priceUsd: 12.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Crime%20and%20Punishment/400/600"
+    },
+    {
+        title: "Don Quixote",
+        author: "Miguel de Cervantes",
+        genres: ["Satire", "Adventure"],
+        priceUsd: 13.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Don%20Quixote/400/600"
+    },
+    {
+        title: "Jane Eyre",
+        author: "Charlotte Brontë",
+        genres: ["Gothic", "Romance"],
+        priceUsd: 9.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Jane%20Eyre/400/600"
+    },
+    {
+        title: "Wuthering Heights",
+        author: "Emily Brontë",
+        genres: ["Gothic", "Romance"],
+        priceUsd: 9.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Wuthering%20Heights/400/600"
+    },
+    {
+        title: "The Da Vinci Code",
+        author: "Dan Brown",
+        genres: ["Thriller", "Mystery"],
+        priceUsd: 9.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-The%20Da%20Vinci%20Code/400/600"
+    },
+    {
+        title: "Life of Pi",
+        author: "Yann Martel",
+        genres: ["Adventure", "Philosophical"],
+        priceUsd: 11.99,
+        rating: generateRandomRating(),
+        image: "https://picsum.photos/seed/book-Life%20of%20Pi/400/600"
+    }
+];
+
+
+
+const renderBooks = (list = books) => {
+    const container = document.getElementById("grid");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    list.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+        <img src="${book.image}" alt="${book.title} cover" class="card-img" />
+        <div class="details">
+            <h3 class="card-title">${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p class="rating"><strong>Rating:</strong> ${book.rating} ⭐</p>
+            <p><strong>Price:</strong> $${book.priceUsd}</p>
+            <div class="details-actions">
+                <button class="btn-primary btn-add-cart" type="button" onclick="addToCart()">Add to cart</button>
+                <button class="btn-secondary btn-view-more" type="button">View more</button>
+            </div>
+        </div>
+      `;
+
+        const img = card.querySelector(".card-img");
+        const details = card.querySelector(".details");
+        details.style.display = "none";
+
+        // toggle details on image click
+        img.addEventListener("click", () => {
+            const allDetails = container.querySelectorAll(".details");
+            allDetails.forEach(d => { if (d !== details) d.style.display = "none"; });
+
+            if (details.style.display === "flex") {
+                details.style.display = "none";
+            } else {
+                details.style.display = "flex";
+                details.style.flexDirection = "column"; 
+            }
+        });
+
+        container.appendChild(card);
+    });
+};
+
+document.addEventListener("DOMContentLoaded", () => renderBooks());
+
+// ✅ Fixed search
+function searchfun() {
+    const searchInput = document.querySelector(".toolbar-search").value.toLowerCase().trim();
+
+    const filteredBooks = books.filter(book => 
+        book.title.toLowerCase().includes(searchInput) ||
+        book.author.toLowerCase().includes(searchInput) ||
+        book.genres.some(genre => genre.toLowerCase().includes(searchInput))
+    );
+
+    renderBooks(filteredBooks);
+}
+function genersfun() {
+    const genreSelection = document.querySelector(".filter-genres").value;
+
+    if (!genreSelection) {
+        return;
+    }
+    if(genreSelection == "All genres"){
+        renderBooks(books);
+
+    }
+    const filteredBooks = books.filter(book => 
+        book.genres.some(genre => genre.toLowerCase() === genreSelection.toLowerCase())
+    );
+
+    renderBooks(filteredBooks);
+}
+let cart =0;
+function addToCart(){
+    cart++;
+    console.log(cart)
+}
+    </script>
+</body>
+</html>
