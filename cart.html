@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart • Book-Nest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .material-symbols-outlined {
+            font-size: 25px;
+            font-weight: 700;
+            padding: 5px;
+            cursor: pointer;
+            margin: 6px;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        nav {
+            display: flex;
+            height: 55px;
+            align-items: center;
+            box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.5);
+            justify-content: space-between;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: white;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 900;
+            font-family: 'Permanent Marker', cursive;
+            margin-right: 20px;
+        }
+
+        .logo a {
+            color: black;
+        }
+
+        .logo a:visited {
+            color: black;
+        }
+
+        .navbar {
+            width: 85vw;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .title {
+            font-size: 30px;
+            font-style: italic;
+            font-family: 'Ms Madi', cursive;
+            font-weight: 900;
+            margin-bottom: -10px;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .cart-container {
+            max-width: 1200px;
+            margin: 80px auto 24px;
+            padding: 0 16px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .cart-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .cart-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* ===== CART ITEMS ===== */
+        #cart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #cart-container>div {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            box-shadow: 3px 1px 2px rgba(0, 0, 0, 0.158);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 6px;
+            padding: 10px;
+        }
+
+        #cart-container>div:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ===== CARD IMAGE ===== */
+        .card-img {
+            width: 150px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.86);
+            margin: 10px;
+        }
+
+        /* ===== CARD DETAILS ===== */
+        .details {
+            flex: 1;
+            padding: 8px 12px;
+            margin-left: 8px;
+            border-left: 1px solid rgba(0, 0, 0, 0.08);
+            gap: 6px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .details p {
+            margin: 2px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .details p strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .rating {
+            color: #f39c12 !important;
+        }
+
+        /* ===== QUANTITY BADGE ===== */
+        .details p:last-child {
+            background: #111;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 999px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 8px;
+            align-self: flex-start;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+        }
+
+        .details p:last-child:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+            background-color: #000;
+        }
+
+        /* ===== CART SUMMARY ===== */
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            box-shadow: 3px 1px 2px rgba(0, 0, 0, 0.158);
+            padding: 24px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .cart-total {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-block;
+            background-color: #111;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+            background-color: #000;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: #111;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            #cart-container>div {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .card-img {
+                width: 120px;
+                height: 160px;
+                margin: 0 auto 15px;
+            }
+
+            .details {
+                border-left: none;
+                border-top: 1px solid rgba(0, 0, 0, 0.08);
+                margin-left: 0;
+                padding-top: 15px;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 24px;
+                margin-right: 10px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .cart-container {
+                margin: 16px auto;
+                padding: 0 8px;
+            }
+
+            .cart-header h1 {
+                font-size: 28px;
+            }
+
+            .card-img {
+                width: 100px;
+                height: 140px;
+            }
+        }
+
+        /* ===== EMPTY CART STATE ===== */
+        #cart-container:empty::before {
+            content: "Your cart is empty";
+            display: block;
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            box-shadow: 3px 1px 2px rgba(0, 0, 0, 0.158);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1 class="logo"> <a href="index.html">BN</a></h1>
+            <div class="navbar">
+                <ul>
+                    <li class="title">Book-Nest</li>
+                </ul>
+            </div>
+            <div class="actions">
+                <span class="material-symbols-outlined" aria-label="Search">search</span>
+                <div style="position: relative;">
+                    <span class="material-symbols-outlined" aria-label="Cart">shopping_cart</span>
+                    <p id="cart-quantity"
+                        style="position: absolute; top: 0; left: 32px; font-size: 10px; font-weight: bold;"></p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-container">
+        <div class="cart-header">
+            <h1>Shopping Cart</h1>
+            <p>Review your items and proceed to checkout</p>
+        </div>
+
+        <div id="cart-container"></div>
+
+        <div class="cart-summary" id="cart-summary" style="display: none;">
+            <div class="cart-total">
+                Total: $<span id="total-price">0.00</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
+                <button class="btn-primary" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+        // function renderCart(){
+        //     console.log(localStorage.getItem('cart'));
+
+        // }
+        // renderCart();
+        const books = [
+            {
+                id: 1,
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                genres: ["Southern Gothic", "Coming-of-age"],
+                priceUsd: 10.99,
+                rating: 4.5,
+                image: "https://m.media-amazon.com/images/I/81gepf1eMqL.jpg"
+            },
+            {
+                id: 2,
+                title: "1984",
+                author: "George Orwell",
+                genres: ["Dystopian", "Political fiction"],
+                priceUsd: 9.99,
+                rating: 4.5,
+                image: "https://rukminim2.flixcart.com/image/704/844/xif0q/book/v/v/f/1984-original-imahc9p42zyurth5.jpeg?q=90&crop=false"
+            },
+            {
+                id: 3,
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                genres: ["Classic", "Tragedy"],
+                priceUsd: 10.99,
+                rating: 4.4,
+                image: "https://m.media-amazon.com/images/I/71V1cA2fiZL._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 4,
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                genres: ["Romance", "Classic"],
+                priceUsd: 8.99,
+                rating: 4.5,
+                image: "https://m.media-amazon.com/images/I/81Scutrtj4L._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 5,
+                title: "The Catcher in the Rye",
+                author: "J.D. Salinger",
+                genres: ["Coming-of-age", "Classic"],
+                priceUsd: 9.99,
+                rating: 4.2,
+                image: "https://m.media-amazon.com/images/I/7108sdEUEGL.jpg"
+            },
+            {
+                id: 6,
+                title: "Moby-Dick",
+                author: "Herman Melville",
+                genres: ["Adventure", "Classic"],
+                priceUsd: 11.99,
+                rating: 4.3,
+                image: "https://m.media-amazon.com/images/I/71K4OH9CqOL._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 7,
+                title: "War and Peace",
+                author: "Leo Tolstoy",
+                genres: ["Historical", "Classic"],
+                priceUsd: 14.99,
+                rating: 4.3,
+                image: "https://cdn.kobo.com/book-images/3ac03eac-d437-47e3-9b15-52542edabd56/1200/1200/False/war-and-peace-34.jpg"
+            },
+            {
+                id: 8,
+                title: "The Lord of the Rings",
+                author: "J.R.R. Tolkien",
+                genres: ["Fantasy", "Epic"],
+                priceUsd: 24.99,
+                rating: 4.5,
+                image: "https://m.media-amazon.com/images/I/7125+5E40JL._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 9,
+                title: "Harry Potter and the Sorcerer's Stone",
+                author: "J.K. Rowling",
+                genres: ["Fantasy", "Young Adult"],
+                priceUsd: 10.99,
+                rating: 4.7,
+                image: "https://m.media-amazon.com/images/I/81q77Q39nEL.jpg"
+            },
+            {
+                id: 10,
+                title: "The Alchemist",
+                author: "Paulo Coelho",
+                genres: ["Adventure", "Philosophical"],
+                priceUsd: 12.99,
+                rating: 4.6,
+                image: "https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg"
+            },
+            {
+                id: 11,
+                title: "The Kite Runner",
+                author: "Khaled Hosseini",
+                genres: ["Historical", "Drama"],
+                priceUsd: 11.99,
+                rating: 4.6,
+                image: "https://m.media-amazon.com/images/I/81IzbD2IiIL.jpg"
+            },
+            {
+                id: 12,
+                title: "The Hunger Games",
+                author: "Suzanne Collins",
+                genres: ["Dystopian", "Young Adult"],
+                priceUsd: 10.99,
+                rating: 4.6,
+                image: "https://m.media-amazon.com/images/I/61I24wOsn8L._UF894,1000_QL80_.jpg"
+            },
+            {
+                id: 13,
+                title: "The Book Thief",
+                author: "Markus Zusak",
+                genres: ["Historical", "Young Adult"],
+                priceUsd: 12.99,
+                rating: 4.6,
+                image: "https://m.media-amazon.com/images/I/914cHl9v7oL._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 14,
+                title: "Brave New World",
+                author: "Aldous Huxley",
+                genres: ["Dystopian", "Science Fiction"],
+                priceUsd: 10.99,
+                rating: 4.4,
+                image: "https://m.media-amazon.com/images/I/91D4YvdC0dL.jpg"
+            },
+            {
+                id: 15,
+                title: "Crime and Punishment",
+                author: "Fyodor Dostoevsky",
+                genres: ["Psychological fiction", "Classic"],
+                priceUsd: 12.99,
+                rating: 4.5,
+                image: "https://cdn.kobo.com/book-images/b1c96137-0ddf-4ee4-8f46-73bdfa9b8621/1200/1200/False/crime-and-punishment-by-fyodor-dostoevsky-1.jpg"
+            },
+            {
+                id: 16,
+                title: "Don Quixote",
+                author: "Miguel de Cervantes",
+                genres: ["Satire", "Adventure"],
+                priceUsd: 13.99,
+                rating: 4.7,
+                image: "https://m.media-amazon.com/images/I/61NlxaWjCYL.jpg"
+            },
+            {
+                id: 17,
+                title: "Jane Eyre",
+                author: "Charlotte Brontë",
+                genres: ["Gothic", "Romance"],
+                priceUsd: 9.99,
+                rating: 4.5,
+                image: "https://m.media-amazon.com/images/I/91zU70Aw9IS._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 18,
+                title: "Wuthering Heights",
+                author: "Emily Brontë",
+                genres: ["Gothic", "Romance"],
+                priceUsd: 9.99,
+                rating: 4.4,
+                image: "https://m.media-amazon.com/images/I/81Tm5QXrdhL._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 19,
+                title: "The Da Vinci Code",
+                author: "Dan Brown",
+                genres: ["Thriller", "Mystery"],
+                priceUsd: 9.99,
+                rating: 4.4,
+                image: "https://m.media-amazon.com/images/I/815WORuYMML._UF1000,1000_QL80_.jpg"
+            },
+            {
+                id: 20,
+                title: "Life of Pi",
+                author: "Yann Martel",
+                genres: ["Adventure", "Philosophical"],
+                priceUsd: 11.99,
+                rating: 4.5,
+                image: "https://m.media-amazon.com/images/I/816NlEQFMOL.jpg"
+            }
+        ];
+        function clearCart(){   
+            cart = [];
+            document.querySelector("#cart-quantity").textContent = "0";
+            localStorage.clear();
+            rendercart();
+        }
+        function removebook(bookId) {
+            // get cart from localStorage
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // filter out the book with the matching id
+            cart = cart.filter(item => item.bookId !== bookId);
+
+            // save updated cart back to localStorage
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            // re-render cart
+            rendercart();
+        }
+
+        function rendercart() {
+            const container = document.getElementById("cart-container");
+            container.innerHTML = ``;
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+            let totalPrice = 0;
+            cart.forEach((item, index) => {
+                const book = books.find(b => b.id === item.bookId);
+                console.log("Book found:", book);
+
+                if (book) {
+                    totalPrice += book.priceUsd * item.quantity;
+                    const box = document.createElement("div");
+                    box.innerHTML = `
+                    <img src="${book.image}" alt="${book.title} cover" class="card-img" />
+                    <div class="details">
+                        <h3 class="card-title">${book.title}</h3>
+                        <p><strong>Author:</strong> ${book.author}</p>
+                        <p class="rating"><strong>Rating:</strong> ${book.rating} ⭐</p>
+                        <p><strong>Price:</strong> $${(book.priceUsd * item.quantity).toFixed(2)}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                        <button class="btn-secondary" onclick="removebook(${book.id})">Remove</button>
+                    </div>
+                    `
+                    container.appendChild(box);
+
+                }
+            });
+
+            // Update cart summary
+            const cartSummary = document.getElementById('cart-summary');
+            const totalPriceElement = document.getElementById('total-price');
+
+            if (cart.length > 0) {
+                cartSummary.style.display = 'block';
+                totalPriceElement.textContent = totalPrice.toFixed(2);
+            } else {
+                cartSummary.style.display = 'none';
+            }
+        }
+         let cartquantity = 0;
+         let cart= localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+            cart.forEach(item => {
+                cartquantity += item.quantity;
+            });
+            
+            document.addEventListener("DOMContentLoaded", () => {
+                rendercart();
+                document.querySelector("#cart-quantity").textContent = cartquantity;
+        });
+
+    </script>
+</body>
+
+</html>
