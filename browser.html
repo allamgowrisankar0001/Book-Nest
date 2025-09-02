@@ -536,6 +536,18 @@
             }
         }
 
+
+        @media (max-width: 640px) {
+    .card .details {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+    }
+        }
         /* Extra small screens (up to 480px) */
         @media (max-width: 480px) {
             nav {
@@ -1652,6 +1664,9 @@
                 document.querySelector("#cart-quantity").textContent = "0";
             }
         });
+        if (window.innerWidth > 640) {
+    details.style.display = "none"; // keep toggle for desktop
+        }
 
         // ✅ Fixed search
         function searchfun() {
