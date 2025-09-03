@@ -680,7 +680,7 @@
             const value = min + Math.floor(Math.random() * steps) * step;
             return Math.round(value * 10) / 10;
         };
-
+        let cart = [];
         const books = [
             {
                 id: 1,
@@ -1680,7 +1680,7 @@
 
             renderBooks(filteredBooks);
         }
-        let cart = [];
+      
         function addToCart(buttonElement) {
             const bookId = parseInt(buttonElement.dataset.bookId);
             let matchingbook;
