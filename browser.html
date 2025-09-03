@@ -1681,8 +1681,7 @@
             renderBooks(filteredBooks);
         }
         let cart = [];
-
-                function addToCart(buttonElement) {
+        function addToCart(buttonElement) {
             const bookId = parseInt(buttonElement.dataset.bookId);
             let matchingbook;
             cart.forEach(item => {
