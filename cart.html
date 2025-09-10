@@ -335,7 +335,6 @@
 
         /* ===== EMPTY CART STATE ===== */
         #cart-container:empty::before {
-            content: "Your cart is empty";
             display: block;
             text-align: center;
             padding: 60px 20px;
@@ -345,6 +344,19 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 12px;
             box-shadow: 3px 1px 2px rgba(0, 0, 0, 0.158);
+        }
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            box-shadow: 3px 1px 2px rgba(0, 0, 0, 0.158);
+            color: #666;
         }
     </style>
 </head>
@@ -376,6 +388,13 @@
         </div>
 
         <div id="cart-container"></div>
+        <div id="empty-state" class="empty-state" style="display:none;">
+            <div>Your cart is empty</div>
+            <div class="cart-actions">
+                <a class="btn-primary" href="browser.html">Browse Books</a>
+                <a class="btn-secondary" href="geners.html">Explore Genres</a>
+            </div>
+        </div>
 
         <div class="cart-summary" id="cart-summary" style="display: none;">
             <div class="cart-total">
@@ -617,7 +636,7 @@
                         <h3 class="card-title">${book.title}</h3>
                         <p><strong>Author:</strong> ${book.author}</p>
                         <p class="rating"><strong>Rating:</strong> ${book.rating} ⭐</p>
-                        <p><strong>Price:</strong> $${(book.priceUsd * item.quantity).toFixed(2)}</p>
+                        <p><strong>Price:</strong> $${(book.priceUsd * item.quantity).toFixed(2)} (${book.priceUsd}$ per each item)</p>
                         <p>Quantity: ${item.quantity}</p>
                         <button class="btn-secondary" onclick="removebook(${book.id})">Remove</button>
                     </div>
@@ -631,11 +650,14 @@
             const cartSummary = document.getElementById('cart-summary');
             const totalPriceElement = document.getElementById('total-price');
 
+            const emptyState = document.getElementById('empty-state');
             if (cart.length > 0) {
                 cartSummary.style.display = 'block';
+                emptyState.style.display = 'none';
                 totalPriceElement.textContent = totalPrice.toFixed(2);
             } else {
                 cartSummary.style.display = 'none';
+                emptyState.style.display = 'flex';
             }
         }
          let cartquantity = 0;
