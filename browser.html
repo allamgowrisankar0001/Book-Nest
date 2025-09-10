@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
     <style>
         /* ===== GLOBAL STYLES ===== */
         * {
@@ -57,7 +61,7 @@
             background: white;
         }
 
-    
+
 
         .logo {
             font-size: 30px;
@@ -105,7 +109,7 @@
             margin-top: 70px;
         }
 
-        
+
 
         /* ===== RESULTS SECTION ===== */
         .results {
@@ -113,72 +117,114 @@
             gap: 16px;
         }
 
-            .toolbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 16px;
-                padding: 8px;
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 8px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
 
-            .toolbar-search {
-                flex: 1;
-                padding: 12px 20px;
-                border: 2px solid rgba(0, 0, 0, 0.08);
-                border-radius: 999px;
-                font-size: 15px;
-                transition: all 0.2s ease;
-            }
+        .toolbar-search {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: 999px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
 
-            .toolbar-search:focus {
-                outline: none;
-                border-color: rgba(0, 0, 0, 0.2);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            }
+        .toolbar-search:focus {
+            outline: none;
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
 
-            .toolbar-actions {
-                display: flex;
-                gap: 12px;
-                align-items: center;
-            }
+        .toolbar-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
 
-            .sort-filters {
-                display: flex;
-                gap: 8px;
-            }
+        .sort-select {
+            padding: 10px 42px 10px 14px;
+            border-radius: 12px;
+            /* smoother corners */
+            border: 1.5px solid #ddd;
+            /* subtle border */
+            background: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            color: #222;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: all 0.25s ease;
 
-            .sort-select {
-                padding: 8px 12px;
-                border-radius: 8px;
-                border: 2px solid rgba(0, 0, 0, 0.08);
-                background-color: white;
-                font-size: 13px;
-                color: #333;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                outline: none;
-            }
+            /* shadow + clean look */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
-            .sort-select:hover {
-                border-color: rgba(0, 0, 0, 0.15);
-            }
+            /* custom arrow */
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='11' stroke='%23000' fill='white'/><polyline points='8 10 12 14 16 10'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 22px;
+        }
 
-            .sort-select:focus {
-                border-color: rgba(0, 0, 0, 0.2);
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            }        /* ===== GRID LAYOUT ===== */
+        .sort-select:hover {
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        .sort-select:focus {
+            border-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .sort-select option {
+            padding: 12px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #fff;
+            color: #222;
+            border-bottom: 1px solid #eee;
+            /* subtle divider */
+        }
+
+        /* last option without divider */
+        .sort-select option:last-child {
+            border-bottom: none;
+        }
+
+        /* hover effect (works only in Chromium browsers) */
+        .sort-select option:hover {
+            background: #000000;
+            /* soft light gray-blue */
+            color: #ffffff;
+        }
+
+        /* selected option (when highlighted in dropdown) */
+        .sort-select option:checked {
+            background: #000000;
+            /* blue highlight */
+            color: #ffffff;
+            /* white text */
+            font-weight: 600;
+        }
+
+        /* ===== GRID LAYOUT ===== */
         .grid {
             padding-left: 6px;
             display: flex;
             flex-wrap: wrap;
             width: 90vw;
             border-left: 1px solid black;
-            border-right: 1px solid black;
-            padding: 5px;
-            align-items: center;
+            /* align-items: center; */
             gap: 5px;
         }
 
@@ -196,6 +242,7 @@
             transition: all 0.2s ease;
             overflow: hidden;
             height: 244px;
+            font-family: 'Poppins', sans-serif !important;
         }
 
         .card:hover {
@@ -213,7 +260,7 @@
             margin: 12px;
             transition: transform 0.3s ease;
         }
-        
+
         .card img:hover {
             transform: scale(1.02) rotate(3deg);
         }
@@ -237,8 +284,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .details p {
@@ -493,28 +547,35 @@
             }
 
             .grid {
+                display: block;
+                /* <-- force grid to full width */
                 width: 100%;
+                /* full screen */
                 padding-left: 0;
                 border-left: none;
-                justify-content: center;
             }
 
             .card {
-                width: 500px;
-                max-width: 420px;
+                width: 100%;
+                /* take up grid width */
+                max-width: 100%;
+                /* remove limit */
                 margin: 5px 0;
             }
 
             .card img {
                 width: 100px;
                 height: 140px;
-                margin: 8px;
-                margin-left:2px;
+                /* margin: 8px; */
+                margin-left: 15px !important;
+                margin-right: 10px !important;
             }
 
             .details {
                 padding: 6px 8px;
                 display: flex !important;
+                margin-left: 0% !important;
+                margin: 0%;
             }
 
             .details .card-title {
@@ -627,6 +688,69 @@
                 margin-top: 4px;
             }
         }
+
+        body {
+            position: relative;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 99999;
+        }
+
+        .toastclass {
+            background: #fff;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            padding: 14px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+            border: 1px solid #ddd;
+            font-size: 15px;
+            min-width: 240px;
+            font-family: 'Poppins', sans-serif;
+            /* ✅ Modern font */
+            animation: slideIn 0.4s ease, fadeOut 0.5s ease 4.5s forwards;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .toastclass.success {
+            border-right: 5px solid #000000;
+        }
+
+        .toastclass i {
+            color: #000000;
+            font-size: 18px;
+        }
+
+        /* slide-in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* fade-out animation */
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(120%);
+            }
+        }
     </style>
 </head>
 
@@ -641,13 +765,17 @@
             </div>
             <div class="actions">
                 <span class="material-symbols-outlined" aria-label="Search">search</span>
-                               <div style=" position: relative;"> <span class="material-symbols-outlined" aria-label="Cart" onclick="window.location.href='cart.html'">shopping_cart</span><p id="cart-quantity" style="position: absolute; top: 0; left: 32px; font-size: 10px;font-weight: bold;"></p></div>
+                <div style=" position: relative;"> <span class="material-symbols-outlined" aria-label="Cart"
+                        onclick="window.location.href='cart.html'">shopping_cart</span>
+                    <p id="cart-quantity"
+                        style="position: absolute; top: 0; left: 32px; font-size: 10px;font-weight: bold;"></p>
+                </div>
             </div>
         </nav>
     </header>
 
     <main class="browse">
-       
+
 
         <section class="results" aria-label="Results">
             <div class="toolbar">
@@ -659,30 +787,28 @@
                             <option value="" disabled selected>Sort by Rating</option>
                             <option value="rating-high">Rating (High to Low)</option>
                             <option value="rating-low">Rating (Low to High)</option>
-                        </select>
-                        <select class="sort-select" aria-label="Sort by price" id="pricing" onchange="price()">
-                            <option value="" disabled selected>Sort by Price</option>
                             <option value="price-low">Price (Low to High)</option>
                             <option value="price-high">Price (High to Low)</option>
                         </select>
+
                     </div>
-                    <button class="btn-secondary">Explore Genres</button>
+                    <button class="btn-secondary"><a href="geners.html">Explore Genres</a></button>
                 </div>
             </div>
 
             <div id="grid" class="grid">
-
             </div>
         </section>
     </main>
 
+    <div class="toast" id="toast">
+    </div>
+    </section>
+    </main>
+
     <script>
-        const generateRandomRating = (min = 3.5, max = 5.0, step = 0.1) => {
-            const steps = Math.floor((max - min) / step) + 1;
-            const value = min + Math.floor(Math.random() * steps) * step;
-            return Math.round(value * 10) / 10;
-        };
-        let cart = [];
+
+
         const books = [
             {
                 id: 1,
@@ -1588,9 +1714,18 @@
                 image: "https://pictures.abebooks.com/isbn/9780525562023-us.jpg"
             }
         ];
-
-
-
+        function toastclick() {
+            let toastbox = document.getElementById('toast');
+            let toast = document.createElement('div');
+            toast.className = "toastclass success";
+            toast.innerHTML = `
+            <p><i class="fa-solid fa-cart-shopping"></i>
+ success, Item added to cart!</p>`
+            toastbox.appendChild(toast);
+            setTimeout(() => {
+                toast.remove()
+            }, 5000)
+        }
         const renderBooks = (list = books) => {
             const container = document.getElementById("grid");
             if (!container) return;
@@ -1600,6 +1735,7 @@
             list.forEach(book => {
                 const card = document.createElement("div");
                 card.className = "card";
+
                 card.innerHTML = `
         <img src="${book.image}" alt="${book.title} cover" class="card-img" />
         <div class="details">
@@ -1609,7 +1745,7 @@
             <p><strong>Genre</strong> ${book.genres[0]}</p>
             <p><strong>Price</strong> $${book.priceUsd}</p>
             <div class="details-actions">
-                <button class="btn-primary btn-add-cart" type="button" onclick="addToCart(this)" data-book-id="${book.id}">Add to cart</button>
+                <button class="btn-primary btn-add-cart" type="button" onclick="addToCart(this)" data-book-id="${book.id}" >Add to cart</button>
                 <button class="btn-secondary btn-view-more" type="button">View more</button>
             </div>
         </div>
@@ -1623,12 +1759,12 @@
                 img.addEventListener("click", () => {
                     const allDetails = container.querySelectorAll(".details");
                     allDetails.forEach(d => { if (d !== details) d.style.display = "none"; });
-
                     if (details.style.display === "flex") {
                         details.style.display = "none";
                     } else {
                         details.style.display = "flex";
                         details.style.flexDirection = "column";
+
                     }
                 });
 
@@ -1638,7 +1774,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             renderBooks();
-            
+
             // Load cart data from localStorage
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
@@ -1666,25 +1802,27 @@
 
             renderBooks(filteredBooks);
         }
-        function genersfun() {
-            const genreSelection = document.querySelector(".filter-genres").value;
+        // function genersfun() {
+        //     const genreSelection = document.querySelector(".filter-genres").value;
 
-            if (!genreSelection) {
-                return;
-            }
-            if (genreSelection == "All genres") {
-                renderBooks(books);
+        //     if (!genreSelection) {
+        //         return;
+        //     }
+        //     if (genreSelection == "All genres") {
+        //         renderBooks(books);
 
-            }
-            const filteredBooks = books.filter(book =>
-                book.genres.some(genre => genre.toLowerCase() === genreSelection.toLowerCase())
-            );
+        //     }
+        //     const filteredBooks = books.filter(book =>
+        //         book.genres.some(genre => genre.toLowerCase() === genreSelection.toLowerCase())
+        //     );
 
-            renderBooks(filteredBooks);
-        }
-      
+        //     renderBooks(filteredBooks);
+        // }
+
+        let cart = [];
         function addToCart(buttonElement) {
             const bookId = parseInt(buttonElement.dataset.bookId);
+
             let matchingbook;
             cart.forEach(item => {
                 if (bookId === item.bookId) {
@@ -1697,47 +1835,48 @@
                 const book = books.find(b => b.id === bookId);
                 cart.push({ bookId: bookId, bookname: book.title, quantity: 1 });
             }
-            
+
+
             // Calculate total quantity from cart array only
             let cartquantity = 0;
             cart.forEach(item => {
                 cartquantity += item.quantity;
             });
-            
+
             document.querySelector("#cart-quantity").textContent = cartquantity;
             // console.log(cart)
-            localStorage.setItem("cartquantity",cartquantity);
-            console.log("Total quantity",cartquantity);
-            
+            localStorage.setItem("cartquantity", cartquantity);
+            console.log("Total quantity", cartquantity);
+
             // Save cart data to localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
             console.log(localStorage.getItem('cart'));
+            toastclick();
         }
-        function clearCart(){   
+        function clearCart() {
             cart = [];
             document.querySelector("#cart-quantity").textContent = "0";
             localStorage.clear();
         }
-        function ratinghigh(){
+        function ratinghigh() {
 
             let sortvalue = document.getElementById("sort");
-            if (sortvalue.value=="rating-high"){
+            if (sortvalue.value == "rating-high") {
                 books.sort((x, y) => y.rating - x.rating);
-                renderBooks();   
-            }else if(sortvalue.value=="rating-low"){
-                books.sort((x,y)=>x.rating - y.rating);
-                renderBooks(x)
+                renderBooks();
+            } else if (sortvalue.value == "rating-low") {
+                books.sort((x, y) => x.rating - y.rating);
+                renderBooks()
+            } else if (sortvalue.value == "price-high") {
+                books.sort((x, y) => y.priceUsd - x.priceUsd);
+                renderBooks();
+            } else if (sortvalue.value == "price-low") {
+                books.sort((x, y) => x.priceUsd - y.priceUsd);
+                renderBooks();
             }
         }
-        function price(){
+        function price() {
             let pricevalue = document.getElementById("pricing")
-            if (pricevalue.value == "price-high"){
-                books.sort((x,y)=>y.priceUsd - x.priceUsd);
-                renderBooks();
-            }else if(pricevalue.value == "price-low"){
-                books.sort((x,y)=>x.priceUsd-y.priceUsd);
-                renderBooks();
-            }
         }
     </script>
 </body>
