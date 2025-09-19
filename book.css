@@ -330,8 +330,12 @@ nav {
         flex-wrap: wrap;
         /* overflow-y: scroll; */
         height: fit-content;
+        width: fit-content;
+        margin-left:0px;
+        margin-right:0px
     }
     .details{
         margin-left: 10px;
     }
+
 }
