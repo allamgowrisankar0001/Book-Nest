@@ -462,6 +462,7 @@
          border-radius: 20px;
          /* match main */
          margin-top: 70px;
+         margin-left:20px;
      }
 
      .hero-subtext {
@@ -566,7 +567,7 @@
          margin-top: 80px;
          align-items: center;
          align-content: center;
-         margin-left: 0;
+         
          height: fit-content;
          text-align: center;
          overflow-x: hidden;
@@ -691,4 +692,5 @@
          /* width: 100px; */
          height: 200px;
      }
+
  }
