@@ -590,7 +590,7 @@ padding: 0;
 width: 90vw !important;
 height: 60px;
 padding: 0px 20px;
-/* overflow-x: auto;                 allow scroll if overflow */
+ overflow-x: auto;                
 }
 
 .genreitem {
@@ -648,7 +648,7 @@ padding: 0;
 width: 90vw !important;
 height: 60px;
 padding: 0px 20px;
-/* overflow-x: auto;                 allow scroll if overflow */
+overflow-x: auto;              
 }
 
 .genreitem {
@@ -716,7 +716,7 @@ padding: 0;
 width: 91vw !important;
 height: 60px;
 padding: 0px 20px;
-/* overflow-x: auto;                 allow scroll if overflow */
+ overflow-x: auto;           
 }
 
 .genreitem {
@@ -794,7 +794,7 @@ padding: 0;
 width: 90vw !important;
 height: 60px;
 padding: 0px 20px;
-/* overflow-x: auto;                 allow scroll if overflow */
+overflow-x: auto;                
 }
 
 .genreitem {
@@ -858,5 +858,6 @@ position: absolute;
 left: 30px;
 width: 90%;
 }
+
 
 }
