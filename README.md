@@ -10,7 +10,6 @@ Lightweight static demo for a small ebook/bookstore UI built with plain HTML, CS
 
 - `index.html` — home / landing (project root). 
 - `book.html`, `browser.html`, `cart.html`, `geners.html`, `saved.html` — example pages for browsing and managing saved books.
-- `jj.html` — job listings demo page (search & filters).
 - `styles.css` — (if present) shared stylesheet referenced by pages.
 
 Note: many pages include inline styles and data arrays inside `<script>` tags for demo purposes.
@@ -33,13 +32,6 @@ Quick way to run a local server:
 
 - If pages don't show dynamic content, open the browser console (F12) to see JS errors.
 - When editing inline scripts, watch for unmatched braces or stray template literals which can stop the rest of the script from running.
-
-## Suggestions / Next steps (low-risk improvements)
-
-- Move large data arrays into separate JSON files and fetch them to keep HTML cleaner.
-- Replace native `<select>` with an accessible custom dropdown component if you require consistent styling across browsers.
-- Add unit tests for the rendering/filter functions using a small test runner (Jest or ava) if you plan to expand logic.
-- Extract repeated DOM rendering code into helper functions to reduce duplication.
 
 ## Contact / Notes
 
